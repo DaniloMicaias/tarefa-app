@@ -1,0 +1,114 @@
+<div class="tarefas-container">
+  <form (ngSubmit)="buscar()" #form="ngForm" class="filtro-form">
+    <label>
+      Número:
+      <input type="text" [(ngModel)]="filtros.id" name="id" placeholder="Número" />
+    </label>
+    <label>
+      Título/Descrição:
+      <input type="text" [(ngModel)]="filtros.titulo" name="titulo" placeholder="Título ou Descrição" />
+    </label>
+    <label>
+      Responsável:
+      <select [(ngModel)]="filtros.responsavel" name="responsavel">
+        <option value="">Selecionar</option>
+        <option value="João">João</option>
+        <option value="Maria">Maria</option>
+        <option value="Pedro">Pedro</option>
+      </select>
+    </label>
+    <label>
+      Situação:
+      <select [(ngModel)]="filtros.situacao" name="situacao">
+        <option value="">Todas</option>
+        <option value="EM_ANDAMENTO">Em andamento</option>
+        <option value="CONCLUIDA">Concluída</option>
+      </select>
+    </label>
+    <button type="submit">Buscar Tarefas</button>
+    <button type="button" (click)="abrirModalCriar()">Nova Tarefa</button>
+  </form>
+
+
+  <table class="tarefas-tabela">
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Título</th>
+        <th>Responsável</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tarefa of tarefas">
+        <td>{{ tarefa.id }}</td>
+        <td>{{ tarefa.titulo }}</td>
+        <td>{{ tarefa.responsavel }}</td>
+        <td>
+          <button (click)="abrirModalEditar(tarefa)">Editar</button> |
+          <button (click)="excluirTarefa(tarefa.id)">Excluir</button> |
+          <button (click)="concluirTarefa(tarefa.id)" [disabled]="tarefa.situacao === 'CONCLUIDA'">Concluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div *ngIf="modalCriarAberto" class="modal-criar">
+  <h3>Cadastrar Tarefa</h3>
+  <form (ngSubmit)="criarTarefa()" #formCriar="ngForm">
+    <label>
+      Título:
+      <input type="text" [(ngModel)]="novaTarefa.titulo" name="titulo" required />
+    </label>
+    <label>
+      Descrição:
+      <textarea [(ngModel)]="novaTarefa.descricao" name="descricao" required></textarea>
+    </label>
+    <div class="form-row">
+      <label>
+        Responsável:
+        <select [(ngModel)]="novaTarefa.responsavel" name="responsavel" required>
+          <option value="" disabled selected>Select</option>
+          <option value="João">João</option>
+          <option value="Maria">Maria</option>
+          <option value="Pedro">Pedro</option>
+        </select>
+      </label>
+      <label>
+        Prioridade:
+        <select [(ngModel)]="novaTarefa.prioridade" name="prioridade" required>
+          <option value="" disabled selected>Select</option>
+          <option value="ALTA">Alta</option>
+          <option value="MEDIA">Média</option>
+          <option value="BAIXA">Baixa</option>
+        </select>
+      </label>
+    </div>
+    <label>
+      Deadline:
+      <input type="date" [(ngModel)]="novaTarefa.deadline" name="deadline" required />
+    </label>
+    <button type="submit">Cadastrar</button>
+    <button type="button" (click)="fecharModalCriar()">Cancelar</button>
+  </form>
+</div>
+<div *ngIf="modalEditarAberto" class="modal-editar">
+  <h3>Editar Tarefa</h3>
+  <form *ngIf="tarefaEditando" (ngSubmit)="atualizarTarefa()" #formEditar="ngForm">
+    <input type="text" [(ngModel)]="tarefaEditando.titulo" name="tituloEdit" placeholder="Título" required />
+    <input type="text" [(ngModel)]="tarefaEditando.descricao" name="descricaoEdit" placeholder="Descrição" required />
+    <input type="text" [(ngModel)]="tarefaEditando.responsavel" name="responsavelEdit" placeholder="Responsável" required />
+    <select [(ngModel)]="tarefaEditando.prioridade" name="prioridadeEdit" required>
+      <option value="ALTA">Alta</option>
+      <option value="MEDIA">Média</option>
+      <option value="BAIXA">Baixa</option>
+    </select>
+    <select [(ngModel)]="tarefaEditando.situacao" name="situacaoEdit" required>
+      <option value="EM_ANDAMENTO">Em andamento</option>
+      <option value="CONCLUIDA">Concluída</option>
+    </select>
+    <input type="date" [(ngModel)]="tarefaEditando.deadline" name="deadlineEdit" placeholder="Prazo" required />
+    <button type="submit">Salvar</button>
+    <button type="button" (click)="fecharModalEditar()">Cancelar</button>
+  </form>
+</div>

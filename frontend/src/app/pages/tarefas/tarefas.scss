@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+$primary-color: #1976d2;
+$secondary-color: #888;
+$background-light: #f5f5f5;
+$border-color: #ccc;
+$text-color: #333;
+$box-shadow: 0 2px 8px rgba(0, 0, 0, 0.267);
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.tarefas-container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+}
+
+// Formulário de filtros
+.filtro-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  label {
+    flex: 1 1 200px;
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+
+    input,
+    select {
+      margin-top: 6px;
+      padding: 8px;
+      border: 1px solid $border-color;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+  }
+
+  button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:first-of-type {
+      background-color: $primary-color;
+      color: white;
+
+      &:hover {
+        background-color: darken($primary-color, 8%);
+      }
+    }
+
+    &:last-of-type {
+      background-color: #4caf50;
+      color: white;
+
+      &:hover {
+        background-color: darken(#4caf50, 8%);
+      }
+    }
+  }
+}
+
+// Tabela de tarefas
+.tarefas-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: $box-shadow;
+
+  th, td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  thead {
+    background-color: $secondary-color;
+    color: white;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: $background-light;
+  }
+
+  button {
+    border: none;
+    background: none;
+    color: $primary-color;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+      background: #e0e0e0;
+    }
+
+    &:disabled {
+      color: #aaa;
+      cursor: not-allowed;
+    }
+  }
+}
+
+// Modal comum para criar e editar
+.modal-criar,
+.modal-editar {
+  max-width: 560px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #fefefe;
+  border-radius: 10px;
+  box-shadow: $box-shadow;
+  border: 1px solid $border-color;
+
+  h3 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.2rem;
+    color: $text-color;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    input,
+    textarea,
+    select {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+
+      > label {
+        flex: 1;
+      }
+    }
+
+    button[type="submit"] {
+      background: $primary-color;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: darken($primary-color, 8%);
+      }
+    }
+
+    button[type="button"] {
+      background: #eee;
+      color: $text-color;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #ddd;
+      }
+    }
+  }
+}
