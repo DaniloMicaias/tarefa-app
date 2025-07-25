@@ -93,6 +93,9 @@ Authorization: Bearer <token>
 - `PUT /tarefas/{id}` — Atualizar tarefa
 - `DELETE /tarefas/{id}` — Excluir tarefa
 
+Também pode ser acessado via:
+- [Swagger](http://localhost:8080/swagger-ui/index.html)
+
 ---
 
 ## Acesso ao Frontend

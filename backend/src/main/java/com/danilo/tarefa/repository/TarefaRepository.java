@@ -4,6 +4,8 @@ import com.danilo.tarefa.model.*;
 import com.danilo.tarefa.model.enums.Prioridade;
 import com.danilo.tarefa.model.enums.Situacao;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -21,4 +23,5 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
     List<Tarefa> findByDeadlineBefore(LocalDate data);
     List<Tarefa> findByTituloContainingIgnoreCase(String titulo);
     List<Tarefa> findBySituacaoAndPrioridade(Situacao situacao, Prioridade prioridade);
+
 }
